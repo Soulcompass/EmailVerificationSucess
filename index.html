@@ -20,15 +20,17 @@
                     contentType: 'application/json',
                     data: JSON.stringify({ oobCode: oobCode, apiKey: apiKey }),
                     success: function(response) {
+                        $('#status').html('<div class="spinner"></div>');
                         if (response.status === 'Email verified successfully') {
                             $('#status').html('Your email verification is successful. <br>' +
                                 'Click the link: <a href="https://advancedsoulcompass.streamlit.app/" target="_blank">https://advancedsoulcompass.streamlit.app/</a> <br>' +
-                                'and Sign In to access the Soul Compass Advanced Application');
+                                'and Sign In to access the Soul Compass Advanced Application.');
                         } else {
                             $('#status').html('Email Verification failed. Please reach out to support.');
                         }
                     },
                     error: function() {
+                        $('#status').html('<div class="spinner"></div>');
                         $('#status').html('Email Verification failed. Kindly reach out to support.');
                     }
                 });
@@ -108,13 +110,27 @@
             max-width: 15%; /* Ensures the image does not exceed the container's width */
             height: auto; /* Maintain aspect ratio */
         }
+        .spinner {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
 
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
     </style>
 </head>
 <body>
     <img id="launchImage" src="launchscreenTOM.png" alt="Launch Screen Image">
     <h1>Email Verification.</h1>
-    <div id="status"></div>
+    <div id="status">
+        <div class="spinner"></div>
+    </div>
 </body>
 </html>
