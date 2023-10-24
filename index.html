@@ -3,6 +3,41 @@
 <head>
     <title>Email Sucessfully Verified</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Extract the oobCode from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const oobCode = urlParams.get('oobCode');
+
+            if (oobCode) {
+                // Send a POST request to the server with the oobCode
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://dashboard.api.tokenofme.io/verifyEmail',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ oobCode: oobCode }),
+                    success: function(response) {
+                        if (response.status === 'Email verified successfully') {
+                            $('#status').html('Your email verification is successful. <br>' +
+                                'Click the link: <a href="https://advancedsoulcompass.streamlit.app/" target="_blank">https://advancedsoulcompass.streamlit.app/</a> <br>' +
+                                'and Sign In to access the Soul Compass Advanced Application');
+                        } else {
+                            $('#status').html('Email Verification failed. Please reach out to support.');
+                        }
+                    },
+                    error: function() {
+                        $('#status').html('Email Verification failed. Kindly reach out to support.');
+                    }
+                });
+            } else {
+                $('#status').html('Invalid request. Missing verification code.');
+            }
+        });
+    </script>
+
+    
     <style>
         /* Page Background */
         body {
@@ -78,10 +113,7 @@
 </head>
 <body>
     <img id="launchImage" src="launchscreenTOM.png" alt="Launch Screen Image">
-    <h1>Email Sucessfully Verified.</h1>
-    <div id="successMessage">
-        Click the link: <a href="https://advancedsoulcompass.streamlit.app/" target="_blank">https://advancedsoulcompass.streamlit.app/</a> <br>
-        and Sign In to access the Soul Compass Advanced Application.
-    </div>
+    <h1>Email Successfully Verified.</h1>
+    <div id="status"></div>
 </body>
 </html>
