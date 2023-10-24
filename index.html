@@ -7,17 +7,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Extract the oobCode from the URL
+            // Extract the oobCode and apiKey from the URL
             const urlParams = new URLSearchParams(window.location.search);
             const oobCode = urlParams.get('oobCode');
+            const apiKey = urlParams.get('apiKey');
 
-            if (oobCode) {
-                // Send a POST request to the server with the oobCode
+            if (oobCode && apiKey) {
+                // Send a POST request to the server with the oobCode and apiKey
                 $.ajax({
                     type: 'POST',
                     url: 'https://dashboard.api.tokenofme.io/verifyEmail',
                     contentType: 'application/json',
-                    data: JSON.stringify({ oobCode: oobCode }),
+                    data: JSON.stringify({ oobCode: oobCode, apiKey: apiKey }),
                     success: function(response) {
                         if (response.status === 'Email verified successfully') {
                             $('#status').html('Your email verification is successful. <br>' +
@@ -32,7 +33,7 @@
                     }
                 });
             } else {
-                $('#status').html('Invalid request. Missing verification code.');
+                $('#status').html('Invalid request. Missing verification code or key.');
             }
         });
     </script>
@@ -55,7 +56,7 @@
 
         /* Title */
         h1 {
-            color: #5df10d;
+            color: #ffffff;
             font-family: 'Modeco', sans-serif;
             font-size: 50px;
             font-weight: 700;
@@ -69,7 +70,7 @@
 
         /* Success Message */
         #successMessage {
-            color: #f6f6f6;
+            color: #5df10d;
             font-family: 'Modeco', sans-serif;
             font-size: 40px;
             text-align: center;
@@ -77,7 +78,7 @@
         }
 
         #status {
-            color: #f8f8f8;
+            color: #5df10d;
             font-family: 'Modeco', sans-serif;
             font-size: 30px;
             font-weight: 400;
@@ -113,7 +114,7 @@
 </head>
 <body>
     <img id="launchImage" src="launchscreenTOM.png" alt="Launch Screen Image">
-    <h1>Email Successfully Verified.</h1>
+    <h1>Email Verification.</h1>
     <div id="status"></div>
 </body>
 </html>
