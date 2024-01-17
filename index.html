@@ -55,8 +55,6 @@
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.log('oobCode:', oobCode);
-                            console.log('newPassword:', newPassword);
-                            console.log('apiKey:', apiKey);
                             console.log('Error:', textStatus, ', Details:', errorThrown);
                             $('#status').html('Password reset failed. Please try again. Error: ' + textStatus);
                         }
