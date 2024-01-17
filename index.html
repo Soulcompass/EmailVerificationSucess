@@ -26,6 +26,9 @@
                     // Get the new password from the form
                     const newPassword = $('#newPassword').val();
 
+                    console.log('oobCode:', oobCode);
+                    
+
                     // Send a POST request to the server with the oobCode and new password
                     $.ajax({
                         type: 'POST',
