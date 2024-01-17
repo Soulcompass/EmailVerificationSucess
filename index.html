@@ -32,6 +32,9 @@
                         url: 'https://dashboard.api.tokenofme.io/resetPassword',
                         contentType: 'application/json',
                         data: JSON.stringify({ oobCode: oobCode, newPassword: newPassword, apiKey: apiKey }),
+                        xhrFields: {
+                            withCredentials: true
+                        },
                         success: function(response) {
                             if (response.status === 'Password reset successfully') {
                                 $('#status').html('Your password has been reset successfully. <br>' +
@@ -147,6 +150,22 @@
             max-width: 25%; /* Ensures the image is responsive and does not exceed its container's width */
             height: auto; /* Maintain aspect ratio */
         }
+        #passwordLabel {
+    color: #ffffff; /* Change this to the color you want */
+        }
+
+        #resetButton {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
 
 
     </style>
@@ -159,9 +178,9 @@
     </div>
 
     <form id="passwordResetForm" style="display: none;">
-        <label for="newPassword">New Password:</label><br>
+        <label for="newPassword" id="passwordLabel">New Password:</label><br>
         <input type="password" id="newPassword" name="newPassword"><br>
-        <input type="submit" value="Reset Password">
+        <input type="submit" value="Reset Password" id="resetButton">
     </form>
 
     <div id="status"></div>
