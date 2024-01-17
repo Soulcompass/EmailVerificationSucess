@@ -12,6 +12,8 @@
             const oobCode = urlParams.get('oobCode');
             const apiKey = urlParams.get('apiKey');
 
+            // Log the oobCode
+            console.log('oobCode:', oobCode);
             if (mode === 'resetPassword') {
                 // Show password reset form and hide email verification message
                 $('#passwordResetForm').show();
@@ -27,7 +29,10 @@
                     const newPassword = $('#newPassword').val();
 
                     console.log('oobCode:', oobCode);
-                    
+
+
+                    // Log the oobCode
+                    console.log('oobCode:', oobCode);
 
                     // Send a POST request to the server with the oobCode and new password
                     $.ajax({
@@ -38,6 +43,7 @@
                         xhrFields: {
                             withCredentials: true
                         },
+                        
                         success: function(response) {
                             if (response.status === 'Password reset successfully') {
                                 $('#status').html('Your password has been reset successfully. <br>' +
